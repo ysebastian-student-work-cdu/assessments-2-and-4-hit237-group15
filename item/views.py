@@ -1,5 +1,7 @@
-from django.views.generic import TemplateView, ListView, DetailView
+from django.urls import reverse_lazy
+from django.views.generic import TemplateView, ListView, DetailView, CreateView
 
+from item.form import CategoryForm
 from item.models import Category
 
 
@@ -40,3 +42,11 @@ class ItemDetailView(DetailView):
     model = Category
     template_name = 'item/item_detail.html'
     context_object_name = 'item'
+
+
+class ItemCreateView(CreateView):
+    # model name , form name, template name
+    model = Category
+    form_class = CategoryForm
+    template_name = "item/item_create.html"
+    success_url = reverse_lazy('item')

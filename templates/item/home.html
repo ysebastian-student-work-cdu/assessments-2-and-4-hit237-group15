@@ -8,19 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
   </head>
   <body>
-
-    <nav class="navbar navbar-expand-sm bg-warning navbar-light">
-  <div class="container-fluid">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link active" href="#">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'item' %}">Items</a>
-      </li>
-    </ul>
-  </div>
-</nav>
+      {% include "item/navbar.html" %}
 
 
   <h3 class="text-center mt-5 mb-3"><b>Group Details</b></h3>
@@ -30,12 +18,14 @@
           <div class="card-body">
             <h5 class="card-title">Name : <b>Ali Zain Kanani</b></h5>
             <h5 class="card-text">Student Id : <b>S357899</b></h5>
+            <h5 class="card-text">Email Id : <b>Alizain572@hotmail.com</b></h5>
           </div>
         </div>
         <div class="card col mx-2 border border-2 border-success rounded">
           <div class="card-body">
             <h5 class="card-title">Name : <b>K M Ekhtiaruddin</b></h5>
             <h5 class="card-text">Student Id : <b>S343230</b></h5>
+            <h5 class="card-text">Email Id : <b>Animkhandakar18@gmail.com</b></h5>
           </div>
         </div>
       </div>
@@ -44,12 +34,14 @@
           <div class="card-body">
             <h5 class="card-title">Name : <b>Prashanna Bastola</b></h5>
             <h5 class="card-text">Student Id : <b>S343033</b></h5>
+            <h5 class="card-text">Email Id : <b>Bastolaprashanna@gmail.com</b></h5>
           </div>
         </div>
          <div class="card col mx-2 border border-2 border-success rounded">
           <div class="card-body">
-            <h5 class="card-title">Name : <b>Nicson Sangroula</b></h5>
+            <h5 class="card-title">Name : <b>Nickson Sangroula</b></h5>
             <h5 class="card-text">Student Id : <b>S357696</b></h5>
+            <h5 class="card-text">Email Id : <b>Sangroulanickson01@gmail.com</b></h5>
           </div>
         </div>
       </div>
@@ -90,7 +82,5 @@
         To reduce food waste, individuals can take actions such as planning meals in advance, buying only what they need, storing food properly, and using leftovers. Businesses and governments can also take actions such as implementing food recovery and donation programs, reducing overproduction, and improving labeling standards.
       </p>
     </div>
-
-
   </body>
 </html>
