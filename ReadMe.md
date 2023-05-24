@@ -1,3 +1,13 @@
+## Important Changes Have Been Made To The Repository
+
+**Please Read Before Naviagting Through the Repository**
+
+Files from the previous Assignment have been move to Assignment2 Folder
+Every group member will commit their files to the top directory of the repository
+
+
+**To run the code** 
+
 Clone the code to PC
 
 Create Virtual Environment
