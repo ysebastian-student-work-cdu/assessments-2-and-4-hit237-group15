@@ -5,8 +5,9 @@
 Files from the previous Assignment have been move to Assignment2 Folder
 Every group member will commit their files to the top directory of the repository
 
+---
 
-**To run the code** 
+## To run the code
 
 Clone the code to PC
 
