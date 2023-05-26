@@ -20,8 +20,9 @@ from app import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
-
-
-
-
+    path('recipe/', views.recipe, name='recipe'),
+    path('add_recipe', views.ADD_recipe, name='add_recipe'),
+    path('delete_recipe/<str:id>', views.DELETE_recipe, name='delete_recipe'),
+    path('update_recipe/<str:id>', views.UPDATE_recipe, name='update_recipe'), 
+    path('update_done_recipe/<str:id>', views.UPDATE_done_recipe, name='update_done_recipe'), 
 ]
