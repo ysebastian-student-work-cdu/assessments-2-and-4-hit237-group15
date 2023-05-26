@@ -61,33 +61,33 @@
         </div>
       </nav>
 <br>
-    <h2 class="alert alert-warning text-center">Recipe Module</h2>
+    <h2 class="alert alert-warning text-center">Fooditems Module</h2>
 
     <div class="container mt-3">
         {% for message in messages %}
         <p class="alert alert-success mt-3">{{message}}</p>
         {% endfor %}
 
-        {% if sel_recipe %}
+        {% if sel_fooditem %}
 
-        <form method="POST" action="{% url 'update_done_recipe' sel_recipe.id %}">
+        <form method="POST" action="{% url 'update_done_fooditem' sel_fooditem.id %}">
             {% csrf_token %}
             <div class="form-group">
-              <label>RecipeID</label>
-              <input type="text" class="form-control" value="{{sel_recipe.recipeID}}" name="recipeID" placeholder="Enter recipeID">
+              <label>itemID</label>
+              <input type="text" class="form-control" value="{{sel_fooditem.itemID}}" name="itemID" placeholder="Enter itemID">
             </div>
             <div class="form-group">
                 <label>Name</label>
-                <input type="text" class="form-control" value="{{sel_recipe.name}}"  name="name" placeholder="Enter name">
+                <input type="text" class="form-control" value="{{sel_fooditem.name}}"  name="name" placeholder="Enter name">
             </div>
 
             <div class="form-group">
-                <label>Ingredients</label>
-                <input type="text" class="form-control" value="{{sel_recipe.ingredients}}" name="ingredients" placeholder="Enter ingredients">
+                <label>category</label>
+                <input type="text" class="form-control" value="{{sel_fooditem.category}}" name="category" placeholder="Enter category">
             </div>
             <div class="form-group">
-                <label>Instructions</label>
-                <input type="text" class="form-control" value="{{sel_recipe.instructions}}" name="instructions" placeholder="Enter instructions">
+                <label>expiryDate</label>
+                <input type="text" class="form-control" value="{{sel_fooditem.expiryDate}}" name="expiryDate" placeholder="Enter expiryDate">
             </div>
             <div class="text-center mt-4"></div>
             <button type="submit" class="btn btn-success">Update</button>
@@ -95,11 +95,11 @@
 
         {% else %}
 
-        <form method="POST" action="{% url 'add_recipe' %}">
+        <form method="POST" action="{% url 'add_fooditem' %}">
             {% csrf_token %}
             <div class="form-group">
-              <label>RecipeID</label>
-              <input type="text" class="form-control" name="recipeID" placeholder="Enter recipeID">
+              <label>itemID</label>
+              <input type="text" class="form-control" name="itemID" placeholder="Enter recipeID">
             </div>
             <div class="form-group">
                 <label>Name</label>
@@ -107,12 +107,12 @@
             </div>
 
             <div class="form-group">
-                <label>Ingredients</label>
-                <input type="text" class="form-control" name="ingredients" placeholder="Enter ingredients">
+                <label>category</label>
+                <input type="text" class="form-control" name="category" placeholder="Enter ingredients">
             </div>
             <div class="form-group">
-                <label>Instructions</label>
-                <input type="text" class="form-control" name="instructions" placeholder="Enter instructions">
+                <label>expiryDate</label>
+                <input type="text" class="form-control" name="expiryDate" placeholder="Enter instructions">
             </div>
             <div class="text-center mt-4"></div>
             <button type="submit" class="btn btn-success">Save</button>
@@ -126,10 +126,10 @@
     <table class="table">
         <thead>
           <tr>
-            <th scope="col">RecipeID</th>
+            <th scope="col">itemID</th>
             <th scope="col">Name</th>
-            <th scope="col">Ingredients</th>
-            <th scope="col">Instructions</th>
+            <th scope="col">category</th>
+            <th scope="col">expiryDate</th>
             <th scope="col">Edit</th>
             <th scope="col">Delete</th>
           </tr>
@@ -137,15 +137,15 @@
         <tbody>
             {% for i in re %}
             <tr>
-                <td>{{i.recipeID}}</td>
+                <td>{{i.itemID}}</td>
                 <td>{{i.name}}</td>
-                <td>{{i.ingredients}}</td>
-                <td>{{i.instructions}}</td>
+                <td>{{i.category}}</td>
+                <td>{{i.expiryDate}}</td>
                 <td>
-                    <a href="/update_recipe/{{i.id}}" class="btn btn-warning">Edit</a>
+                    <a href="/update_fooditem/{{i.id}}" class="btn btn-warning">Edit</a>
                 </td>
                 <td>
-                    <a href="/delete_recipe/{{i.id}}" class="btn btn-danger">Delete</a>
+                    <a href="/delete_fooditem/{{i.id}}" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
             {% endfor %}
