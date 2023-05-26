@@ -25,4 +25,12 @@ urlpatterns = [
     path('delete_recipe/<str:id>', views.DELETE_recipe, name='delete_recipe'),
     path('update_recipe/<str:id>', views.UPDATE_recipe, name='update_recipe'), 
     path('update_done_recipe/<str:id>', views.UPDATE_done_recipe, name='update_done_recipe'), 
+    path('food_item/', views.food_item, name='food_item'),
+    path('add_fooditem', views.ADD_fooditem, name='add_fooditem'),
+    path('delete_fooditem/<str:id>', views.DELETE_fooditem, name='delete_fooditem'),
+    path('update_done_fooditem/<str:id>', views.UPDATE_done_fooditem, name='update_done_fooditem'), 
+    path('update_fooditem/<str:id>', views.UPDATE_fooditem, name='update_fooditem'), 
+
+
+
 ]
