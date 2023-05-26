@@ -8,3 +8,6 @@ def app(request):
 
 def index(request):
     return render(request, 'index.html')
+
+def index2(request):
+    return 1        #test function 
