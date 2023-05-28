@@ -30,7 +30,10 @@ urlpatterns = [
     path('delete_fooditem/<str:id>', views.DELETE_fooditem, name='delete_fooditem'),
     path('update_done_fooditem/<str:id>', views.UPDATE_done_fooditem, name='update_done_fooditem'), 
     path('update_fooditem/<str:id>', views.UPDATE_fooditem, name='update_fooditem'), 
-
-
+    path('food_waste/', views.food_waste, name='food_waste'),
+    path('add_foodwaste', views.ADD_foodwaste, name='add_foodwaste'),
+    path('delete_foodwaste/<str:id>', views.DELETE_foodwaste, name='delete_foodwaste'),
+    path('update_done_foodwaste/<str:id>', views.UPDATE_done_foodwaste, name='update_done_foodwaste'), 
+    path('update_foodwaste/<str:id>', views.UPDATE_foodwaste, name='update_foodwaste'), 
 
 ]

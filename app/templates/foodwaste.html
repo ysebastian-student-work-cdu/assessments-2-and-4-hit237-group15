@@ -48,7 +48,7 @@
         }
 
       </style> 
-    <title>Food Item</title>
+    <title>Food Waste</title>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light ">
@@ -62,33 +62,33 @@
         </div>
       </nav>
 <br>
-    <h2 class="alert alert-warning text-center">Fooditems Module</h2>
+    <h2 class="alert alert-warning text-center">Foodwaste Module</h2>
 
     <div class="container mt-3">
         {% for message in messages %}
         <p class="alert alert-success mt-3">{{message}}</p>
         {% endfor %}
 
-        {% if sel_fooditem %}
+        {% if sel_foodwaste %}
 
-        <form method="POST" action="{% url 'update_done_fooditem' sel_fooditem.id %}">
+        <form method="POST" action="{% url 'update_done_foodwaste' sel_foodwaste.id %}">
             {% csrf_token %}
             <div class="form-group">
-              <label>itemID</label>
-              <input type="text" class="form-control" value="{{sel_fooditem.itemID}}" name="itemID" placeholder="Enter itemID">
+              <label>wasteID</label>
+              <input type="text" class="form-control" value="{{sel_foodwaste.wasteID}}" name="wasteID" placeholder="Enter wasteID">
             </div>
             <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control" value="{{sel_fooditem.name}}"  name="name" placeholder="Enter name">
+                <label>itemID</label>
+                <input type="text" class="form-control" value="{{sel_foodwaste.itemID}}"  name="itemID" placeholder="Enter itemID">
             </div>
 
             <div class="form-group">
-                <label>category</label>
-                <input type="text" class="form-control" value="{{sel_fooditem.category}}" name="category" placeholder="Enter category">
+                <label>quantityWasted</label>
+                <input type="text" class="form-control" value="{{sel_foodwaste.quantityWasted}}" name="quantityWasted" placeholder="Enter quantityWasted">
             </div>
             <div class="form-group">
-                <label>expiryDate</label>
-                <input type="text" class="form-control" value="{{sel_fooditem.expiryDate}}" name="expiryDate" placeholder="Enter expiryDate">
+                <label>reason</label>
+                <input type="text" class="form-control" value="{{sel_foodwaste.reason}}" name="reason" placeholder="Enter reason">
             </div>
             <div class="text-center mt-4"></div>
             <button type="submit" class="btn btn-success">Update</button>
@@ -96,24 +96,24 @@
 
         {% else %}
 
-        <form method="POST" action="{% url 'add_fooditem' %}">
+        <form method="POST" action="{% url 'add_foodwaste' %}">
             {% csrf_token %}
             <div class="form-group">
-              <label>itemID</label>
-              <input type="text" class="form-control" name="itemID" placeholder="Enter recipeID">
+              <label>wasteID</label>
+              <input type="text" class="form-control" name="wasteID" placeholder="Enter wasteID">
             </div>
             <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control" name="name" placeholder="Enter name">
+                <label>itemID</label>
+                <input type="text" class="form-control" name="itemID" placeholder="Enter itemID">
             </div>
 
             <div class="form-group">
-                <label>category</label>
-                <input type="text" class="form-control" name="category" placeholder="Enter category">
+                <label>quantityWasted</label>
+                <input type="text" class="form-control" name="quantityWasted" placeholder="Enter quantityWasted">
             </div>
             <div class="form-group">
-                <label>expiryDate</label>
-                <input type="text" class="form-control" name="expiryDate" placeholder="Enter expiryDate">
+                <label>reason</label>
+                <input type="text" class="form-control" name="reason" placeholder="Enter reason">
             </div>
             <div class="text-center mt-4"></div>
             <button type="submit" class="btn btn-success">Save</button>
@@ -127,10 +127,10 @@
     <table class="table">
         <thead>
           <tr>
+            <th scope="col">wasteID</th>
             <th scope="col">itemID</th>
-            <th scope="col">Name</th>
-            <th scope="col">category</th>
-            <th scope="col">expiryDate</th>
+            <th scope="col">quantityWasted</th>
+            <th scope="col">reason</th>
             <th scope="col">Edit</th>
             <th scope="col">Delete</th>
           </tr>
@@ -138,15 +138,15 @@
         <tbody>
             {% for i in re %}
             <tr>
+                <td>{{i.wasteID}}</td>
                 <td>{{i.itemID}}</td>
-                <td>{{i.name}}</td>
-                <td>{{i.category}}</td>
-                <td>{{i.expiryDate}}</td>
+                <td>{{i.quantityWasted}}</td>
+                <td>{{i.reason}}</td>
                 <td>
-                    <a href="/update_fooditem/{{i.id}}" class="btn btn-warning">Edit</a>
+                    <a href="/update_foodwaste/{{i.id}}" class="btn btn-warning">Edit</a>
                 </td>
                 <td>
-                    <a href="/delete_fooditem/{{i.id}}" class="btn btn-danger">Delete</a>
+                    <a href="/delete_foodwaste/{{i.id}}" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
             {% endfor %}
