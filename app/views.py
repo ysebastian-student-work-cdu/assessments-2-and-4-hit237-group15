@@ -126,3 +126,64 @@ def UPDATE_fooditem(request, id):
     }
     
     return render(request, 'fooditems.html', context)
+
+
+def food_waste(request):
+    re = FoodWaste.objects.all()
+    context = {
+        're' : re,
+    }
+    return render(request, 'foodwaste.html', context)
+
+def ADD_foodwaste(request):
+    if request.method == "POST":
+        wasteID = request.POST.get('wasteID')
+        itemID = request.POST.get('itemID')
+        quantityWasted = request.POST.get('quantityWasted')
+        reason = request.POST.get('reason')
+
+        re = FoodWaste(
+            wasteID = wasteID,
+            itemID = itemID,
+            quantityWasted = quantityWasted,
+            reason = reason
+        )
+        re.save()
+        messages.info(request, "Food waste Added")
+
+    return redirect('food_waste')
+
+
+
+def DELETE_foodwaste(request, id):
+    re = FoodWaste.objects.filter(id = id)
+    re.delete()
+
+    context = {
+        're' : re,
+    }
+    messages.info(request, "Food waste Deleted")
+
+    return redirect('food_waste')
+
+
+def UPDATE_done_foodwaste(request, id):
+    sel_foodwaste = FoodWaste.objects.get(id = id)
+    sel_foodwaste.wasteID = request.POST.get('wasteID')
+    sel_foodwaste.itemID = request.POST.get('itemID')
+    sel_foodwaste.quantityWasted = request.POST.get('quantityWasted')
+    sel_foodwaste.reason = request.POST.get('reason')
+    sel_foodwaste.save()
+    messages.info(request, "Food waste updated")
+
+    return redirect('food_waste')
+
+def UPDATE_foodwaste(request, id):
+    sel_foodwaste = FoodWaste.objects.get(id = id)
+    re = FoodWaste.objects.all()
+    context = {
+        'sel_foodwaste' : sel_foodwaste,
+        're' : re,
+    }
+    
+    return render(request, 'foodwaste.html', context)
