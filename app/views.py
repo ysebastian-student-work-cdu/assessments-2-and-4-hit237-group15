@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import redirect, get_object_or_404
 from django.contrib import messages
-from app.models import Recipe, FoodItems, FoodWaste
+from app.models import User, Audit_Record, Food_Items
 # Create your views here.
 def app(request):
     return render(request, 'index.html')
@@ -9,181 +9,181 @@ def app(request):
 def index(request):
     return render(request, 'index.html')
 
-def recipe(request):
-    re = Recipe.objects.all()
+def user(request):
+    re = User.objects.all()
     context = {
         're' : re,
     }
-    return render(request, 'recipe.html', context)
+    return render(request, 'user.html', context)
 
-def ADD_recipe(request):
+def ADD_user(request):
     if request.method == "POST":
-        recipeID = request.POST.get('recipeID')
+        userid = request.POST.get('userid')
         name = request.POST.get('name')
-        ingredients = request.POST.get('ingredients')
-        instructions = request.POST.get('instructions')
+        email = request.POST.get('email')
+        role = request.POST.get('role')
 
-        re = Recipe(
-            recipeID = recipeID,
+        re = User(
+            userid = userid,
             name = name,
-            ingredients = ingredients,
-            instructions = instructions
+            email = email,
+            role = role
         )
         re.save()
-        messages.info(request, "Recipe Added")
+        messages.info(request, "user Added")
 
-    return redirect('recipe')
+    return redirect('user')
 
-def DELETE_recipe(request, id):
-    re = Recipe.objects.filter(id = id)
+def DELETE_user(request, id):
+    re = User.objects.filter(id = id)
     re.delete()
 
     context = {
         're' : re,
     }
-    messages.info(request, "Recipe Deleted")
+    messages.info(request, "user Deleted")
 
-    return redirect('recipe')
+    return redirect('user')
 
-def UPDATE_recipe(request, id):
-    sel_recipe = Recipe.objects.get(id = id)
-    re = Recipe.objects.all()
+def UPDATE_user(request, id):
+    sel_recipe = User.objects.get(id = id)
+    re = User.objects.all()
     context = {
         'sel_recipe' : sel_recipe,
         're' : re,
     }
     
-    return render(request, 'recipe.html', context)
+    return render(request, 'user.html', context)
 
-def UPDATE_done_recipe(request, id):
-    sel_recipe = Recipe.objects.get(id = id)
-    sel_recipe.recipeID = request.POST.get('recipeID')
+def UPDATE_done_user(request, id):
+    sel_recipe = User.objects.get(id = id)
+    sel_recipe.userid = request.POST.get('userid')
     sel_recipe.name = request.POST.get('name')
-    sel_recipe.ingredients = request.POST.get('ingredients')
-    sel_recipe.instructions = request.POST.get('instructions')
+    sel_recipe.email = request.POST.get('email')
+    sel_recipe.role = request.POST.get('role')
     sel_recipe.save()
-    messages.info(request, "Recipe updated")
+    messages.info(request, "user updated")
 
-    return redirect('recipe')
+    return redirect('user')
 
 
-def food_item(request):
-    re = FoodItems.objects.all()
+def audit_record(request):
+    re = Audit_Record.objects.all()
     context = {
         're' : re,
     }
-    return render(request, 'fooditems.html', context)
+    return render(request, 'audit_record.html', context)
 
 
-def ADD_fooditem(request):
+def ADD_audit_record(request):
     if request.method == "POST":
-        itemID = request.POST.get('itemID')
-        name = request.POST.get('name')
-        category = request.POST.get('category')
-        expiryDate = request.POST.get('expiryDate')
+        food_item = request.POST.get('food_item')
+        location = request.POST.get('location')
+        audit_date = request.POST.get('audit_date')
+        waste_quantity = request.POST.get('waste_quantity')
 
-        re = FoodItems(
-            itemID = itemID,
-            name = name,
-            category = category,
-            expiryDate = expiryDate
+        re = Audit_Record(
+            food_item = food_item,
+            location = location,
+            audit_date = audit_date,
+            waste_quantity = waste_quantity
         )
         re.save()
-        messages.info(request, "Food item Added")
+        messages.info(request, "Record Added")
 
-    return redirect('food_item')
+    return redirect('audit_record')
 
-def DELETE_fooditem(request, id):
-    re = FoodItems.objects.filter(id = id)
+def DELETE_audit_record(request, id):
+    re = Audit_Record.objects.filter(id = id)
     re.delete()
 
     context = {
         're' : re,
     }
-    messages.info(request, "Food item Deleted")
+    messages.info(request, "Record Deleted")
 
-    return redirect('food_item')
+    return redirect('audit_record')
 
 
 
-def UPDATE_done_fooditem(request, id):
-    sel_fooditem = FoodItems.objects.get(id = id)
-    sel_fooditem.itemID = request.POST.get('itemID')
-    sel_fooditem.name = request.POST.get('name')
-    sel_fooditem.category = request.POST.get('category')
-    sel_fooditem.expiryDate = request.POST.get('expiryDate')
+def UPDATE_done_audit_record(request, id):
+    sel_fooditem = Audit_Record.objects.get(id = id)
+    sel_fooditem.food_item = request.POST.get('food_item')
+    sel_fooditem.location = request.POST.get('location')
+    sel_fooditem.audit_date = request.POST.get('audit_date')
+    sel_fooditem.waste_quantity = request.POST.get('waste_quantity')
     sel_fooditem.save()
-    messages.info(request, "Food item updated")
+    messages.info(request, "Record updated")
 
-    return redirect('food_item')
+    return redirect('audit_record')
 
-def UPDATE_fooditem(request, id):
-    sel_fooditem = FoodItems.objects.get(id = id)
-    re = FoodItems.objects.all()
+def UPDATE_audit_record(request, id):
+    sel_fooditem = Audit_Record.objects.get(id = id)
+    re = Audit_Record.objects.all()
     context = {
         'sel_fooditem' : sel_fooditem,
         're' : re,
     }
     
-    return render(request, 'fooditems.html', context)
+    return render(request, 'audit_record.html', context)
 
 
-def food_waste(request):
-    re = FoodWaste.objects.all()
+def food_items(request):
+    re = Food_Items.objects.all()
     context = {
         're' : re,
     }
-    return render(request, 'foodwaste.html', context)
+    return render(request, 'food_item.html', context)
 
-def ADD_foodwaste(request):
+def ADD_food_item(request):
     if request.method == "POST":
-        wasteID = request.POST.get('wasteID')
-        itemID = request.POST.get('itemID')
-        quantityWasted = request.POST.get('quantityWasted')
+        name = request.POST.get('name')
+        category = request.POST.get('category')
+        quantity = request.POST.get('quantity')
         reason = request.POST.get('reason')
 
-        re = FoodWaste(
-            wasteID = wasteID,
-            itemID = itemID,
-            quantityWasted = quantityWasted,
+        re = Food_Items(
+            name = name,
+            category = category,
+            quantity = quantity,
             reason = reason
         )
         re.save()
-        messages.info(request, "Food waste Added")
+        messages.info(request, "Food Item Added")
 
-    return redirect('food_waste')
+    return redirect('food_items')
 
 
 
-def DELETE_foodwaste(request, id):
-    re = FoodWaste.objects.filter(id = id)
+def DELETE_food_item(request, id):
+    re = Food_Items.objects.filter(id = id)
     re.delete()
 
     context = {
         're' : re,
     }
-    messages.info(request, "Food waste Deleted")
+    messages.info(request, "Food Item Deleted")
 
-    return redirect('food_waste')
+    return redirect('food_items')
 
 
-def UPDATE_done_foodwaste(request, id):
-    sel_foodwaste = FoodWaste.objects.get(id = id)
-    sel_foodwaste.wasteID = request.POST.get('wasteID')
-    sel_foodwaste.itemID = request.POST.get('itemID')
-    sel_foodwaste.quantityWasted = request.POST.get('quantityWasted')
+def UPDATE_done_food_item(request, id):
+    sel_foodwaste = Food_Items.objects.get(id = id)
+    sel_foodwaste.name = request.POST.get('name')
+    sel_foodwaste.category = request.POST.get('category')
+    sel_foodwaste.quantity = request.POST.get('quantity')
     sel_foodwaste.reason = request.POST.get('reason')
     sel_foodwaste.save()
-    messages.info(request, "Food waste updated")
+    messages.info(request, "Food Item updated")
 
-    return redirect('food_waste')
+    return redirect('food_items')
 
-def UPDATE_foodwaste(request, id):
-    sel_foodwaste = FoodWaste.objects.get(id = id)
-    re = FoodWaste.objects.all()
+def UPDATE_food_item(request, id):
+    sel_foodwaste = Food_Items.objects.get(id = id)
+    re = Food_Items.objects.all()
     context = {
         'sel_foodwaste' : sel_foodwaste,
         're' : re,
     }
     
-    return render(request, 'foodwaste.html', context)
+    return render(request, 'food_item.html', context)

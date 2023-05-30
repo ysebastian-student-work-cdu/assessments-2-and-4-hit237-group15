@@ -1,0 +1,127 @@
+{% load static %} 
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    
+    <title>Food Item</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light ">
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link active" href="{% url 'index' %}">Home</a>
+            <a class="nav-item nav-link" href="{% url 'user' %}">User</a>
+            <a class="nav-item nav-link" href="{% url 'audit_record' %}">Audit Record</a>
+            <a class="nav-item nav-link" href="{% url 'food_items' %}">Food Item</a>
+          </div>
+        </div>
+      </nav>
+<h4 class="alert alert-warning text-center">Food waste Audit tool (Food Item)</h4>
+
+<div class="container text-center">
+  <div class="card p-3">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><strong>Food Items:</strong> Represents the individual food items that are audited and tracked for waste.</li>
+    </ul>
+  </div>
+</div>
+
+    <div class="container mt-3">
+        {% for message in messages %}
+        <p class="alert alert-success mt-3">{{message}}</p>
+        {% endfor %}
+
+        {% if sel_foodwaste %}
+
+        <form method="POST" action="{% url 'update_done_food_item' sel_foodwaste.id %}">
+            {% csrf_token %}
+            <div class="form-group">
+              <label>Enter Name</label>
+              <input type="text" class="form-control" value="{{sel_foodwaste.name}}" name="name" placeholder="Represents the name or description of the food item" required>
+            </div>
+            <div class="form-group">
+                <label>Enter Category</label>
+                <input type="text" class="form-control" value="{{sel_foodwaste.category}}"  name="category" placeholder="Represents the category or type of the food item (e.g., fruits, vegetables etc)" required>
+            </div>
+
+            <div class="form-group">
+                <label>Enter Quantity</label>
+                <input type="text" class="form-control" value="{{sel_foodwaste.quantity}}" name="quantity" pattern="[0-9]+" placeholder="Represents the quantity or amount of the food item wasted" required>
+            </div>
+            <div class="form-group">
+                <label>Enter Reason</label>
+                <input type="text" class="form-control" value="{{sel_foodwaste.reason}}" name="reason" placeholder="Capture the reason for the food waste (e.g., Leftovers, Unsold, Overbuying, expired)" required>
+            </div>
+            <div class="text-center mt-4"></div>
+            <button type="submit" class="btn btn-success">Update</button>
+        </form>
+
+        {% else %}
+
+        <form method="POST" action="{% url 'add_food_item' %}">
+            {% csrf_token %}
+            <div class="form-group">
+              <label>Enter Name</label>
+              <input type="text" class="form-control" name="name" placeholder="Represents the name or description of the food item" required>
+            </div>
+            <div class="form-group">
+                <label>Enter Category</label>
+                <input type="text" class="form-control" name="category" placeholder="Represents the category or type of the food item (e.g., fruits, vegetables etc)" required>
+            </div>
+
+            <div class="form-group">
+                <label>Enter Quantity</label>
+                <input type="text" class="form-control" name="quantity" pattern="[0-9]+" placeholder="Represents the quantity or amount of the food item wasted" required>
+            </div>
+            <div class="form-group">
+                <label>Enter Reason</label>
+                <input type="text" class="form-control" name="reason" placeholder="Capture the reason for the food waste (e.g., Leftovers, Unsold, Overbuying, expired)" required>
+            </div>
+            <div class="text-center mt-4"></div>
+            <button type="submit" class="btn btn-success">Save</button>
+        </form>
+
+        {% endif %}
+
+    </div>
+
+<div class="container mt-5">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Category</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Reason</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for i in re %}
+            <tr>
+                <td>{{i.name}}</td>
+                <td>{{i.category}}</td>
+                <td>{{i.quantity}}</td>
+                <td>{{i.reason}}</td>
+                <td>
+                    <a href="/update_food_item/{{i.id}}" class="btn btn-warning">Edit</a>
+                </td>
+                <td>
+                    <a href="/delete_food_item/{{i.id}}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+
+</div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
