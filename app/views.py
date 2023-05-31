@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import redirect, get_object_or_404
 from django.contrib import messages
-from app.models import User, Audit_Record
+from app.models import User, Audit_Record, Food_Items
 # Create your views here.
 def app(request):
     return render(request, 'index.html')
@@ -127,3 +127,63 @@ def UPDATE_audit_record(request, id):
     
     return render(request, 'audit_record.html', context)
 
+
+def food_items(request):
+    re = Food_Items.objects.all()
+    context = {
+        're' : re,
+    }
+    return render(request, 'food_item.html', context)
+
+def ADD_food_item(request):
+    if request.method == "POST":
+        name = request.POST.get('name')
+        category = request.POST.get('category')
+        quantity = request.POST.get('quantity')
+        reason = request.POST.get('reason')
+
+        re = Food_Items(
+            name = name,
+            category = category,
+            quantity = quantity,
+            reason = reason
+        )
+        re.save()
+        messages.info(request, "Food Item Added")
+
+    return redirect('food_items')
+
+
+
+def DELETE_food_item(request, id):
+    re = Food_Items.objects.filter(id = id)
+    re.delete()
+
+    context = {
+        're' : re,
+    }
+    messages.info(request, "Food Item Deleted")
+
+    return redirect('food_items')
+
+
+def UPDATE_done_food_item(request, id):
+    sel_foodwaste = Food_Items.objects.get(id = id)
+    sel_foodwaste.name = request.POST.get('name')
+    sel_foodwaste.category = request.POST.get('category')
+    sel_foodwaste.quantity = request.POST.get('quantity')
+    sel_foodwaste.reason = request.POST.get('reason')
+    sel_foodwaste.save()
+    messages.info(request, "Food Item updated")
+
+    return redirect('food_items')
+
+def UPDATE_food_item(request, id):
+    sel_foodwaste = Food_Items.objects.get(id = id)
+    re = Food_Items.objects.all()
+    context = {
+        'sel_foodwaste' : sel_foodwaste,
+        're' : re,
+    }
+    
+    return render(request, 'food_item.html', context)

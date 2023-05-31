@@ -1,53 +1,12 @@
+{% load static %} 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 
-    <style>
-        img {
-            display: block;
-            width: 100%;
-            height: 50%;
-            object-fit: cover;
-            animation: bouncein 1s ease-in-out;
-        }
-
-        .navbar {
-          background-color: lightblue;
-          overflow: hidden;
-          display: flex;
-          justify-content: flex-start;
-          padding: 10px;
-        }
-        
-        .navbar-left {
-          display: flex;
-          align-items: center;
-        }
-        
-        .navbar a {
-          color: white;
-          text-align: center;
-          padding: 14px 16px;
-          text-decoration: none;
-        }
-        
-        .navbar a:hover {
-          background-color: #ddd;
-          color: black;
-        }
-        .Home_footer {
-            background-color: #444;
-            color: #fff;
-            padding: 10px;
-            text-align: center;
-            position: absolute;
-            width: 100%;
-        }
-
-      </style> 
     <title>AuditRecord</title>
   </head>
   <body>
@@ -57,7 +16,7 @@
             <a class="nav-item nav-link active" href="{% url 'index' %}">Home</a>
             <a class="nav-item nav-link" href="{% url 'user' %}">User</a>
             <a class="nav-item nav-link" href="{% url 'audit_record' %}">Audit Record</a>
-
+            <a class="nav-item nav-link" href="{% url 'food_items' %}">Food Item</a>
           </div>
         </div>
       </nav>
@@ -83,20 +42,20 @@
             {% csrf_token %}
             <div class="form-group">
               <label>Enter Food item</label>
-              <input type="text" class="form-control" value="{{sel_fooditem.food_item}}" name="food_item" placeholder="Represents which food item was wasted">
+              <input type="text" class="form-control" value="{{sel_fooditem.food_item}}" name="food_item" placeholder="Represents which food item was wasted" required>
             </div>
             <div class="form-group">
                 <label>Enter Location</label>
-                <input type="text" class="form-control" value="{{sel_fooditem.location}}"  name="location" placeholder="Represents the location of the food waste audit">
+                <input type="text" class="form-control" value="{{sel_fooditem.location}}"  name="location" placeholder="Represents the location of the food waste audit" required>
             </div>
 
             <div class="form-group">
                 <label>Enter Audit date</label>
-                <input type="text" class="form-control" value="{{sel_fooditem.audit_date}}" name="audit_date" placeholder="Represents the date of the food waste audit">
+                <input type="text" class="form-control" value="{{sel_fooditem.audit_date}}" name="audit_date" placeholder="Represents the date of the food waste audit" required>
             </div>
             <div class="form-group">
-                <label>Enter Waste quantity</label>
-                <input type="text" class="form-control" value="{{sel_fooditem.waste_quantity}}" name="waste_quantity" placeholder="Store the quantity of food waste recorded during the audit">
+                <label>Enter Waste quantity in kg(only Number)</label>
+                <input type="text" class="form-control" value="{{sel_fooditem.waste_quantity}}" name="waste_quantity" pattern="[0-9]+" placeholder="Store the quantity of food waste recorded during the audit" required>
             </div>
             <div class="text-center mt-4"></div>
             <button type="submit" class="btn btn-success">Update</button>
@@ -108,20 +67,20 @@
             {% csrf_token %}
             <div class="form-group">
               <label>Enter Food item</label>
-              <input type="text" class="form-control" name="food_item" placeholder="Represents which food item was wasted">
+              <input type="text" class="form-control" name="food_item" placeholder="Represents which food item was wasted" required>
             </div>
             <div class="form-group">
                 <label>Enter Location</label>
-                <input type="text" class="form-control" name="location" placeholder="Represents the location of the food waste audit">
+                <input type="text" class="form-control" name="location" placeholder="Represents the location of the food waste audit" required>
             </div>
 
             <div class="form-group">
                 <label>Enter Audit date</label>
-                <input type="text" class="form-control" name="audit_date" placeholder="Represents the date of the food waste audit">
+                <input type="text" class="form-control" name="audit_date" placeholder="Represents the date of the food waste audit" required>
             </div>
             <div class="form-group">
-                <label>Enter Waste quantity</label>
-                <input type="text" class="form-control" name="waste_quantity" placeholder="Store the quantity of food waste recorded during the audit">
+                <label>Enter Waste quantity in kg(only Number)</label>
+                <input type="text" class="form-control" name="waste_quantity" pattern="[0-9]+" placeholder="Store the quantity of food waste recorded during the audit" required>
             </div>
             <div class="text-center mt-4"></div>
             <button type="submit" class="btn btn-success">Save</button>
