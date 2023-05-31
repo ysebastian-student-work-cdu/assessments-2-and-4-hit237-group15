@@ -10,3 +10,13 @@ class User(models.Model):
     def __str__(self):
         return self.name
 
+
+class Audit_Record(models.Model):
+    food_item  = models.TextField()
+    location = models.CharField(max_length=200)
+    audit_date = models.TextField()
+    waste_quantity = models.TextField()
+
+    def __str__(self):
+        return self.name
+

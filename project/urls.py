@@ -25,6 +25,10 @@ urlpatterns = [
     path('delete_user/<str:id>', views.DELETE_user, name='delete_user'),
     path('update_user/<str:id>', views.UPDATE_user, name='update_user'), 
     path('update_done_user/<str:id>', views.UPDATE_done_user, name='update_done_user'), 
+    path('audit_record/', views.audit_record, name='audit_record'),
+    path('add_audit_record', views.ADD_audit_record, name='add_audit_record'),
+    path('delete_audit_record/<str:id>', views.DELETE_audit_record, name='delete_audit_record'),
+    path('update_done_audit_record/<str:id>', views.UPDATE_done_audit_record, name='update_done_audit_record'), 
+    path('update_audit_record/<str:id>', views.UPDATE_audit_record, name='update_audit_record'), 
     
-
 ]
